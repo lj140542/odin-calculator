@@ -1,0 +1,12 @@
+{
+  "name": "odin-calculator",
+  "description": "OdinProject's Calculator",
+  "main": "calculator.js",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/lj140542/odin-calculator.git"
+  },
+  "dependencies": {
+    "jest": "^28.1.1"
+  }
+}
