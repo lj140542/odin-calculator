@@ -16,3 +16,5 @@ function Calculator() {
         return x / y;
     };
 };
+
+module.exports = Calculator;
