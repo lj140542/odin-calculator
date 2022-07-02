@@ -5,7 +5,7 @@ function Calculator() {
     };
 
     this.substract = function (x, y) {
-        return x - y;
+        return (x) - (y);
     };
 
     this.multiply = function (x, y) {
@@ -13,6 +13,10 @@ function Calculator() {
     };
 
     this.divide = function (x, y) {
+        if(y == 0) {
+            return 'Well played mister Poincaré !';
+        }
+
         return x / y;
     };
 };
