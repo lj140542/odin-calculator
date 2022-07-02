@@ -91,4 +91,18 @@ describe("Calculator class tests", () => {
     test('pass 3 numbers', () => {
         expect(calculator.divide(6, 2, 3)).toBe(3);
     });
+
+    // operate method's tests
+    test('using the operate method to add numbers', () => {
+        expect(calculator.operate('+',6,2)).toBe(8);
+    });
+    test('using the operate method to substract numbers', () => {
+        expect(calculator.operate('-',6,2)).toBe(4);
+    });
+    test('using the operate method to multiply numbers', () => {
+        expect(calculator.operate('*',6,2)).toBe(12);
+    });
+    test('using the operate method to divide numbers', () => {
+        expect(calculator.operate('/',6,2)).toBe(3);
+    });
 });
