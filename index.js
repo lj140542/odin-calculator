@@ -1,5 +1,6 @@
 import Calculator from './calculator.js';
 
+const possibleOperators = ['/','*','-','+','='];
 const calc = new Calculator();
 const display = document.getElementById('display');
 const title = document.getElementById('title');
@@ -13,19 +14,33 @@ let tabOperators = [];
 let tabHisto = [];
 
 
-function operandPressed() {
-    if (this.textContent == '.' && display.innerHTML.includes('.')) {
-        return;
+function operandPressed(keyOperand) {
+    let operand;
+    if (isNaN(parseInt(keyOperand)) == false) {
+        operand = keyOperand;
+    } else {
+        operand = this.textContent;
     }
 
+    if (operand == '.' && display.innerHTML.includes('.')) {
+        return;
+    }
     if (tabOperators.length > 0 && display.innerHTML == tabOperands[tabOperands.length - 1]) {
         display.innerHTML = '';
     }
+
     clearButton.innerHTML = 'C';
-    display.innerHTML += this.textContent;
+    display.innerHTML += operand;
 };
 
-function operatorPressed() {
+function operatorPressed(keyOperator) {
+    let operator;
+    if (keyOperator.length == 1 && possibleOperators.includes(keyOperator) >= 0) {
+        operator = keyOperator;
+    } else {
+        operator = this.textContent;
+    }
+
     if (isNaN(parseInt(display.innerHTML)) == false) {
         if (display.innerHTML.includes('.')) {
             tabOperands.push(parseFloat(display.innerHTML));
@@ -33,7 +48,7 @@ function operatorPressed() {
             tabOperands.push(parseInt(display.innerHTML));
         }
 
-        tabOperators.push(this.textContent);
+        tabOperators.push(operator);
         checkForOperate(true);
     }
 };
@@ -43,7 +58,7 @@ function checkForOperate(isEqual = false) {
 
     if (tabOperators.length > 0 && tabOperands.length >= 2) {
         result = calc.operate(tabOperators[0], tabOperands[0], tabOperands[1]);
-        if (isNaN(parseInt(result))) {
+        if (isNaN(parseInt(result)) == true) {
             title.innerHTML = result;
             clear();
             return;
@@ -77,7 +92,23 @@ function clear(bForce = false) {
     clearButton.innerHTML = 'AC';
 };
 
+function inputHandle(e) {
+    let keyPressed = e.key;
+    if (keyPressed == 'Backspace') {
+        clear();
+    }
+    if (keyPressed == 'Enter') {
+        keyPressed = '=';
+    }
 
+    if (isNaN(parseInt(keyPressed)) == false) {
+        operandPressed(keyPressed);
+    } else if (keyPressed.length == 1 && possibleOperators.includes(keyPressed) >= 0) {
+        operatorPressed(keyPressed);
+    }
+}
+
+window.addEventListener('keydown', inputHandle);
 operands.forEach(element => {
     element.addEventListener('click', operandPressed);
 });
