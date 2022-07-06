@@ -21,6 +21,7 @@ function operandPressed() {
     if (tabOperators.length > 0 && display.innerHTML == tabOperands[tabOperands.length - 1]) {
         display.innerHTML = '';
     }
+    clearButton.innerHTML = 'C';
     display.innerHTML += this.textContent;
 };
 
@@ -66,10 +67,12 @@ function checkForOperate(isEqual = false) {
     }
 };
 
-function clear() {
-    tabOperands = [];
-    tabOperators = [];
-    tabHisto = [];
+function clear(bForce = false) {
+    if (bForce == true || clearButton.innerHTML == 'AC') {
+        tabOperands = [];
+        tabOperators = [];
+        tabHisto = [];
+    }
     display.innerHTML = '';
     clearButton.innerHTML = 'AC';
 };
