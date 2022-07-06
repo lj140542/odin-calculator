@@ -14,6 +14,10 @@ let tabHisto = [];
 
 
 function operandPressed() {
+    if (this.textContent == '.' && display.innerHTML.includes('.')) {
+        return;
+    }
+
     if (tabOperators.length > 0 && display.innerHTML == tabOperands[tabOperands.length - 1]) {
         display.innerHTML = '';
     }
@@ -22,7 +26,12 @@ function operandPressed() {
 
 function operatorPressed() {
     if (isNaN(parseInt(display.innerHTML)) == false) {
-        tabOperands.push(parseInt(display.innerHTML));
+        if (display.innerHTML.includes('.')) {
+            tabOperands.push(parseFloat(display.innerHTML));
+        } else {
+            tabOperands.push(parseInt(display.innerHTML));
+        }
+
         tabOperators.push(this.textContent);
         checkForOperate(true);
     }
@@ -42,7 +51,7 @@ function checkForOperate(isEqual = false) {
                 result = parseFloat(result).toFixed(2);
             }
             display.innerHTML = result
-        } 
+        }
 
         tabHisto.push('' + tabOperands[0] + ' ' + tabOperators[0] + ' ' + tabOperands[1] + ' = ' + result);
         tabOperands[1] = result;
