@@ -38,8 +38,11 @@ function checkForOperate(isEqual = false) {
             clear();
             return;
         } else {
-            display.innerHTML = result;
-        }
+            if (result.toString().includes('.')) {
+                result = parseFloat(result).toFixed(2);
+            }
+            display.innerHTML = result
+        } 
 
         tabHisto.push('' + tabOperands[0] + ' ' + tabOperators[0] + ' ' + tabOperands[1] + ' = ' + result);
         tabOperands[1] = result;
