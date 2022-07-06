@@ -74,7 +74,7 @@ describe("Calculator class tests", () => {
         expect(calculator.divide(6, 2)).toBe(3);
     });
     test('divide a number by 0', () => {
-        expect(calculator.divide(6, 0)).toBe('Well played mister Poincaré !');
+        expect(calculator.divide(6, 0)).toBe('Genius\'s Calculator');
     });
     test('divide a positive number by a negative one', () => {
         expect(calculator.divide(6, -2)).toBe(-3);

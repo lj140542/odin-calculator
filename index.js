@@ -2,6 +2,7 @@ import Calculator from './calculator.js';
 
 const calc = new Calculator();
 const display = document.getElementById('display');
+const title = document.getElementById('title');
 const operands = Array.from(document.getElementsByClassName('operand'));
 const operators = Array.from(document.getElementsByClassName('operator'));
 const functions = Array.from(document.getElementsByClassName('function'));
@@ -32,7 +33,13 @@ function checkForOperate(isEqual = false) {
 
     if (tabOperators.length > 0 && tabOperands.length >= 2) {
         result = calc.operate(tabOperators[0], tabOperands[0], tabOperands[1]);
-        display.innerHTML = result;
+        if (isNaN(parseInt(result))) {
+            title.innerHTML = result;
+            clear();
+            return;
+        } else {
+            display.innerHTML = result;
+        }
 
         tabHisto.push('' + tabOperands[0] + ' ' + tabOperators[0] + ' ' + tabOperands[1] + ' = ' + result);
         tabOperands[1] = result;
@@ -45,8 +52,6 @@ function checkForOperate(isEqual = false) {
         tabOperands[0] = tabOperands.pop();
         tabOperators[0] = tabOperators.pop();
     }
-
-    console.log(tabHisto.toString());
 };
 
 function clear() {

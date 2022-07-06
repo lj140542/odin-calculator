@@ -14,7 +14,7 @@ function Calculator() {
 
     this.divide = function (x, y) {
         if (y == 0) {
-            return 'Well played mister Poincaré !';
+            return 'Genius\'s Calculator';
         }
 
         return x / y;
